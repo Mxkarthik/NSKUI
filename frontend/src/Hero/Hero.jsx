@@ -28,7 +28,10 @@ export default function Hero() {
         </h1>
 
         <p className="hero-description" data-gsap="hero-description">
-          Complete Construction Solutions — From Planning to Execution.
+          Complete Construction Solutions —{" "}
+          <span className="hero-description-highlight">
+            From Planning to Execution
+          </span>
         </p>
 
         <a href="#projects" className="hero-cta" data-gsap="hero-cta" aria-label="Explore our projects">

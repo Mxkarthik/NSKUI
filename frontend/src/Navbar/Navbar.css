@@ -36,13 +36,21 @@
     0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
-/* Logo ---------------------------------------------------------- */
-.navbar-logo img {
-  height: 36px;
-  width: auto;
-  object-fit: contain;
-  display: block;
+/* Logo (wordmark) ----------------------------------------------- */
+.navbar-logo {
+  font-family: "Manrope", sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: #111111;
+  text-decoration: none;
+  letter-spacing: -0.03em;
+  line-height: 1;
   user-select: none;
+  white-space: nowrap;
+
+  /* Vertically center with nav links */
+  display: flex;
+  align-items: center;
 }
 
 /* Desktop nav links -------------------------------------------- */

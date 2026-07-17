@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./Navbar.css";
-import logo from "../assets/hero/LOGO.png";
 
 const NAV_LINKS = [
   { label: "Home",     href: "#home" },
@@ -17,9 +16,9 @@ export default function Navbar() {
     <nav className="navbar" aria-label="Primary navigation">
       <div className="navbar-inner">
 
-        {/* ── Logo ─────────────────────────────────── */}
-        <a href="#home" className="navbar-logo" aria-label="NSK – home">
-          <img src={logo} alt="NSK Logo" />
+        {/* ── Logo (wordmark) ──────────────────────── */}
+        <a href="#home" className="navbar-logo" aria-label="NSK ETECH – home">
+          NSK ETECH
         </a>
 
         {/* ── Desktop links ────────────────────────── */}
