@@ -1,17 +1,26 @@
 import "./Hero.css";
 import Navbar from "../Navbar/Navbar";
 
-import background from "../assets/hero/background.png";
-import building   from "../assets/hero/building.png";
-import clouds     from "../assets/hero/clouds.png";
+import building    from "../assets/hero/building.png";
+import leftCloud   from "../assets/hero/leftcloud.png";
+import rightCloud  from "../assets/hero/rightcloud.png";
+import bottomCloud from "../assets/hero/bottomcloud.png";
 
 export default function Hero() {
   return (
     <section
       className="hero"
-      style={{ backgroundImage: `url(${background})` }}
       aria-label="Hero section"
     >
+
+      {/* ── Background layer 1 — base sky gradient ── */}
+      <div className="hero-bg"         aria-hidden="true" data-gsap="hero-bg" />
+
+      {/* ── Background layer 2 — sunset glow + atm ── */}
+      <div className="hero-glow"       aria-hidden="true" data-gsap="hero-glow" />
+
+      {/* ── Background layer 3 — noise grain ────── */}
+      <div className="hero-atmosphere" aria-hidden="true" data-gsap="hero-atmosphere" />
 
       {/* ── Navbar ──────────────────────────────────── */}
       <Navbar />
@@ -19,16 +28,12 @@ export default function Hero() {
       {/* ── Hero content ────────────────────────────── */}
       <div className="hero-content" data-gsap="hero-content">
 
-        <p className="hero-subtitle" data-gsap="hero-subtitle">
-          Planning&nbsp;•&nbsp;Design&nbsp;•&nbsp;Construction&nbsp;•&nbsp;Execution
-        </p>
-
         <h1 className="hero-title" data-gsap="hero-title">
           Build What Moves You
         </h1>
 
         <p className="hero-description" data-gsap="hero-description">
-          Complete Construction Solutions —{" "}
+          Complete Construction Solutions -{" "}
           <span className="hero-description-highlight">
             From Planning to Execution
           </span>
@@ -47,30 +52,40 @@ export default function Hero() {
         </a>
       </div>
 
-      {/* ── Cloud Left ──────────────────────────────── */}
+      {/* ── Left cloud ──────────────────────────────── */}
       <img
-        src={clouds}
+        src={leftCloud}
         alt=""
-        className="hero-cloud hero-cloud--left"
+        className="hero-cloud-left"
         aria-hidden="true"
         data-gsap="cloud-left"
       />
 
-      {/* ── Cloud Right (mirrored) ───────────────────── */}
+      {/* ── Right cloud ─────────────────────────────── */}
       <img
-        src={clouds}
+        src={rightCloud}
         alt=""
-        className="hero-cloud hero-cloud--right"
+        className="hero-cloud-right"
         aria-hidden="true"
         data-gsap="cloud-right"
       />
 
       {/* ── Building ────────────────────────────────── */}
+      <div className="hero-building-wrapper" data-gsap="hero-building">
+        <img
+          src={building}
+          alt="NSK Construction flagship building"
+          className="hero-building"
+        />
+      </div>
+
+      {/* ── Bottom cloud (mist layer over building base) */}
       <img
-        src={building}
-        alt="NSK Construction flagship building"
-        className="hero-building"
-        data-gsap="hero-building"
+        src={bottomCloud}
+        alt=""
+        className="hero-cloud-bottom"
+        aria-hidden="true"
+        data-gsap="cloud-bottom"
       />
 
     </section>

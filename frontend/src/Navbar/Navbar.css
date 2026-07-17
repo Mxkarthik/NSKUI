@@ -1,6 +1,6 @@
 /* ================================================================
    NAVBAR
-   Floating pill, semi-transparent, backdrop blur
+   Floating frosted-glass pill — premium architectural quality
    ================================================================ */
 
 .navbar {
@@ -9,55 +9,65 @@
   left: 50%;
   transform: translateX(-50%);
 
-  width: 90%;
-  max-width: 1400px;
+  width: 84%;
+  max-width: 1360px;
 
   z-index: 100;
+
+  /* GSAP fade-in target */
+  will-change: opacity, transform;
 }
 
-/* Inner pill ---------------------------------------------------- */
+/* ── Inner pill ──────────────────────────────────────────────── */
 .navbar-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  height: 72px;
-  padding: 0 28px;
+  height: 68px;
+  padding: 0 36px;
 
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: rgba(255, 255, 255, 0.52);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
 
-  border: 1px solid rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.72);
   border-radius: 999px;
 
   box-shadow:
-    0 4px 24px rgba(0, 0, 0, 0.06),
-    0 1px 3px rgba(0, 0, 0, 0.04);
+    0 2px 0   rgba(255, 255, 255, 0.6)  inset,  /* top highlight */
+    0 6px 28px rgba(0, 0, 0, 0.07),
+    0 1px 4px  rgba(0, 0, 0, 0.04);
 }
 
-/* Logo (wordmark) ----------------------------------------------- */
+/* ── Logo wordmark ───────────────────────────────────────────── */
 .navbar-logo {
   font-family: "Manrope", sans-serif;
   font-size: 32px;
-  font-weight: 800;
-  color: #111111;
+  font-weight: 900;
+  color: #0f0f0f;
   text-decoration: none;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   line-height: 1;
   user-select: none;
   white-space: nowrap;
 
-  /* Vertically center with nav links */
   display: flex;
   align-items: center;
+
+  /* Subtle hover state */
+  transition: opacity 0.2s ease;
 }
 
-/* Desktop nav links -------------------------------------------- */
+.navbar-logo:hover {
+  opacity: 0.75;
+}
+
+/* ── Desktop nav links ───────────────────────────────────────── */
 .navbar-links {
   display: flex;
   align-items: center;
-  gap: 36px;
+  gap: 38px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -65,70 +75,78 @@
 
 .navbar-link {
   font-family: "Manrope", sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #2a2a2a;
   text-decoration: none;
   letter-spacing: -0.01em;
 
   position: relative;
-  padding-bottom: 2px;
+  padding-bottom: 3px;
 
-  transition: color 0.25s ease;
+  transition: color 0.22s ease;
 }
 
-/* Animated underline on hover */
+/* Animated underline */
 .navbar-link::after {
   content: "";
   position: absolute;
-  bottom: -2px;
+  bottom: 0;
   left: 0;
   width: 0;
   height: 1.5px;
-  background: #111827;
+  background: #0f0f0f;
   border-radius: 999px;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.32s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navbar-link:hover {
-  color: #111827;
+  color: #0f0f0f;
 }
 
 .navbar-link:hover::after {
   width: 100%;
 }
 
-/* CTA button ---------------------------------------------------- */
+/* ── Call Us button ──────────────────────────────────────────── */
 .navbar-cta {
   font-family: "Manrope", sans-serif;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 700;
   color: #ffffff;
   text-decoration: none;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
 
   display: inline-flex;
   align-items: center;
 
-  height: 42px;
+  height: 40px;
   padding: 0 22px;
 
   background: #111827;
   border-radius: 999px;
 
+  box-shadow: 0 2px 8px rgba(17, 24, 39, 0.20);
+
   transition:
-    background 0.25s ease,
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+    background  0.22s ease,
+    transform   0.25s ease,
+    box-shadow  0.25s ease;
 }
 
 .navbar-cta:hover {
-  background: #1f2937;
+  background: #1e2d42;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(17, 24, 39, 0.28);
+  box-shadow:
+    0 8px 24px rgba(17, 24, 39, 0.28),
+    0 2px 6px  rgba(17, 24, 39, 0.16);
 }
 
-/* Hamburger ---------------------------------------------------- */
+.navbar-cta:active {
+  transform: translateY(0);
+}
+
+/* ── Hamburger ───────────────────────────────────────────────── */
 .navbar-hamburger {
   display: none;
   flex-direction: column;
@@ -136,8 +154,8 @@
   align-items: center;
   gap: 5px;
 
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   padding: 4px;
   border: none;
   background: transparent;
@@ -165,9 +183,9 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Mobile drawer ------------------------------------------------- */
+/* ── Mobile drawer ───────────────────────────────────────────── */
 .navbar-mobile-drawer {
-  display: none; /* shown only on mobile via media query */
+  display: none;
   overflow: hidden;
   max-height: 0;
   opacity: 0;
@@ -175,23 +193,23 @@
   margin-top: 10px;
   padding: 0 8px;
 
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
 
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.82);
   border-radius: 24px;
 
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
 
   transition:
-    max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.3s ease,
-    padding 0.3s ease;
+    max-height 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity    0.3s  ease,
+    padding    0.3s  ease;
 }
 
 .navbar-mobile-drawer.is-open {
-  max-height: 400px;
+  max-height: 420px;
   opacity: 1;
   padding: 16px 8px;
 }
@@ -202,7 +220,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .navbar-mobile-link {
@@ -212,9 +230,10 @@
   font-weight: 600;
   color: #111827;
   text-decoration: none;
-  padding: 12px 16px;
-  border-radius: 12px;
-  transition: background 0.2s ease;
+  padding: 13px 18px;
+  border-radius: 14px;
+  letter-spacing: -0.01em;
+  transition: background 0.18s ease;
 }
 
 .navbar-mobile-link:hover {
@@ -229,25 +248,34 @@
   color: #ffffff;
   text-decoration: none;
   text-align: center;
-  padding: 13px 16px;
-  margin: 8px 0 4px;
-  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 10px 0 4px;
+  border-radius: 14px;
   background: #111827;
+  letter-spacing: 0.01em;
   transition: background 0.2s ease;
 }
 
 .navbar-mobile-cta:hover {
-  background: #1f2937;
+  background: #1e2d42;
 }
 
 /* ================================================================
    RESPONSIVE
    ================================================================ */
 
-/* Tablet */
-@media (max-width: 900px) {
+/* ── Tablet (≤ 992px) ──────────────────────────────────────────── */
+@media (max-width: 992px) {
+  .navbar {
+    width: 88%;
+  }
+
+  .navbar-inner {
+    padding: 0 28px;
+  }
+
   .navbar-links {
-    gap: 22px;
+    gap: 24px;
   }
 
   .navbar-link {
@@ -255,8 +283,23 @@
   }
 }
 
-/* Mobile */
-@media (max-width: 680px) {
+/* ── Small tablet (≤ 768px) — hamburger kicks in ───────────────── */
+@media (max-width: 768px) {
+  .navbar {
+    top: 16px;
+    width: 92%;
+  }
+
+  .navbar-inner {
+    height: 64px;
+    padding: 0 22px;
+    border-radius: 32px;
+  }
+
+  .navbar-logo {
+    font-size: 28px;
+  }
+
   .navbar-links,
   .navbar-cta {
     display: none;
@@ -266,12 +309,45 @@
     display: flex;
   }
 
+  .navbar-hamburger span {
+    width: 24px;
+  }
+
   .navbar-mobile-drawer {
     display: block;
   }
+}
+
+/* ── Mobile (≤ 576px) ──────────────────────────────────────────── */
+@media (max-width: 576px) {
+  .navbar {
+    top: 14px;
+    width: 92%;
+  }
 
   .navbar-inner {
-    height: 64px;
-    padding: 0 20px;
+    height: 60px;
+    padding: 0 18px;
+  }
+
+  .navbar-logo {
+    font-size: 26px;
+  }
+}
+
+/* ── Extra small (≤ 390px) ─────────────────────────────────────── */
+@media (max-width: 390px) {
+  .navbar {
+    top: 12px;
+    width: 94%;
+  }
+
+  .navbar-inner {
+    height: 56px;
+    padding: 0 16px;
+  }
+
+  .navbar-logo {
+    font-size: 24px;
   }
 }
