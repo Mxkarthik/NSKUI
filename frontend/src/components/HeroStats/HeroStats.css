@@ -1,0 +1,274 @@
+/* ================================================================
+   HERO STATS — Floating glassmorphism statistics panel
+   ──────────────────────────────────────────────────────────────
+   Z-index: 20 — sits above all Hero layers (building is z:10,
+   content is z:10) and floats over the next section.
+   ================================================================ */
+
+/* ================================================================
+   PANEL
+   ================================================================ */
+
+.hero-stats {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 90%;
+  max-width: 1400px;
+  height: 110px;
+
+  z-index: 20;
+
+  /* ── Glassmorphism ── */
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 28px;
+  box-shadow:
+    /* Ambient lift shadow */
+    0 20px 60px rgba(0, 0, 0, 0.12),
+    /* Top highlight — simulates light hitting the top glass edge */
+    0 1px 0 rgba(255, 255, 255, 0.55) inset,
+    /* Subtle inner depth on bottom edge */
+    0 -1px 0 rgba(255, 255, 255, 0.08) inset;
+
+  /* GSAP will override opacity/transform on mount */
+  will-change: opacity, transform;
+}
+
+/* ================================================================
+   LIST RESET
+   ================================================================ */
+
+.hero-stats__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  height: 100%;
+}
+
+/* ================================================================
+   STAT ITEM — wrapper that holds divider + card
+   ================================================================ */
+
+.hero-stats__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  will-change: opacity, transform;
+}
+
+/* ================================================================
+   VERTICAL DIVIDERS
+   Hidden on first child (no left divider before first item).
+   Height is 65% of the panel, vertically centred.
+   ================================================================ */
+
+.hero-stats__divider {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 1px;
+  height: 65%;
+
+  background: rgba(15, 23, 42, 0.08);
+
+  /* Hide divider before the very first stat */
+  display: block;
+}
+
+.hero-stats__item:first-child .hero-stats__divider {
+  display: none;
+}
+
+/* ================================================================
+   CARD — content block
+   ================================================================ */
+
+.hero-stats__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  padding: 0 24px;
+  text-align: center;
+
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              filter 0.3s ease;
+
+  cursor: default;
+}
+
+/* ── Hover lift ── */
+.hero-stats__item:hover .hero-stats__card {
+  transform: translateY(-4px);
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.10));
+}
+
+/* ================================================================
+   VALUE — the big number / text (e.g. "250+")
+   ================================================================ */
+
+.hero-stats__value {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(32px, 3.2vw, 48px);
+  font-weight: 800;
+  line-height: 1;
+  color: #0f172a;
+  letter-spacing: -0.03em;
+
+  display: block;
+  white-space: nowrap;
+}
+
+/* ================================================================
+   LABEL — descriptor below value (e.g. "Projects Completed")
+   ================================================================ */
+
+.hero-stats__label {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(13px, 1.2vw, 18px);
+  font-weight: 500;
+  line-height: 1.35;
+  color: #475569;
+  letter-spacing: -0.01em;
+
+  display: block;
+  white-space: nowrap;
+}
+
+/* ================================================================
+   RESPONSIVE — Tablet (≤ 992px) → 2 × 2 grid
+   ================================================================ */
+
+@media (max-width: 992px) {
+  .hero-stats {
+    height: auto;
+    bottom: -90px; /* panel is taller now — push down further */
+    padding: 20px 0;
+    border-radius: 22px;
+  }
+
+  .hero-stats__list {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 0;
+  }
+
+  .hero-stats__item {
+    height: 80px;
+  }
+
+  /* Re-apply dividers for the 2×2 layout:
+     Hide left divider on items 1 and 3 (first column). */
+  .hero-stats__item:nth-child(odd) .hero-stats__divider {
+    display: none;
+  }
+
+  .hero-stats__item:nth-child(even) .hero-stats__divider {
+    display: block;
+  }
+
+  /* Horizontal divider between the two rows */
+  .hero-stats__item:nth-child(3)::after,
+  .hero-stats__item:nth-child(4)::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 12%;
+    width: 76%;
+    height: 1px;
+    background: rgba(15, 23, 42, 0.08);
+  }
+}
+
+/* ================================================================
+   RESPONSIVE — Mobile (≤ 600px) → Single column
+   ================================================================ */
+
+@media (max-width: 600px) {
+  .hero-stats {
+    bottom: -auto;
+    /* On mobile the panel flows in-document, no overlap */
+    position: relative;
+    bottom: unset;
+    left: unset;
+    transform: none;
+
+    width: 90%;
+    margin: -28px auto 0;
+
+    height: auto;
+    padding: 16px 0;
+    border-radius: 18px;
+  }
+
+  .hero-stats__list {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .hero-stats__item {
+    height: 68px;
+  }
+
+  /* Dividers become horizontal on single-column */
+  .hero-stats__divider {
+    /* Override the vertical positioning */
+    position: absolute;
+    top: 0;
+    left: 12%;
+    transform: none;
+
+    width: 76%;
+    height: 1px;
+
+    /* Re-show all except first */
+    display: block;
+  }
+
+  .hero-stats__item:first-child .hero-stats__divider {
+    display: none;
+  }
+
+  /* Remove the ::after row-dividers from tablet layout */
+  .hero-stats__item:nth-child(3)::after,
+  .hero-stats__item:nth-child(4)::after {
+    display: none;
+  }
+
+  .hero-stats__card {
+    padding: 0 16px;
+  }
+
+  .hero-stats__value {
+    font-size: 30px;
+  }
+
+  .hero-stats__label {
+    font-size: 13px;
+  }
+}
+
+/* ================================================================
+   REDUCED MOTION — respect user preference
+   ================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-stats__card {
+    transition: none;
+  }
+}

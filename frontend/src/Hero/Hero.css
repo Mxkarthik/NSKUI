@@ -26,7 +26,12 @@
   align-items: center;
   justify-content: flex-start;
 
-  overflow: hidden;
+  /*
+   * overflow: visible so the HeroStats panel (bottom: -55px) can
+   * bleed out of the section boundary and overlap the next section.
+   * Background layers use position:absolute so they still clip correctly.
+   */
+  overflow: visible;
   /* background set entirely by child layers */
 }
 
@@ -41,6 +46,8 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
+  /* Clip to section bounds independently — hero is now overflow:visible */
+  overflow: hidden;
 }
 
 /* ── Layer 1 — base sky ─────────────────────────────────────────
@@ -270,7 +277,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 65%;
-  z-index: 3;
+  z-index: 10;
   pointer-events: none;
   user-select: none;
   will-change: transform; /* GSAP rise animation */

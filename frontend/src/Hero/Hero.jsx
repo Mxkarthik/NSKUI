@@ -1,10 +1,11 @@
 import "./Hero.css";
 import Navbar from "../Navbar/Navbar";
+import HeroStats from "../components/HeroStats/HeroStats";
 
 import building    from "../assets/hero/building.png";
 import leftCloud   from "../assets/hero/leftcloud.png";
 import rightCloud  from "../assets/hero/rightcloud.png";
-import bottomCloud from "../assets/hero/bottomcloud.png";
+
 
 export default function Hero() {
   return (
@@ -79,14 +80,8 @@ export default function Hero() {
         />
       </div>
 
-      {/* ── Bottom cloud (mist layer over building base) */}
-      <img
-        src={bottomCloud}
-        alt=""
-        className="hero-cloud-bottom"
-        aria-hidden="true"
-        data-gsap="cloud-bottom"
-      />
+      {/* ── Hero Statistics — floats over bottom of Hero + next section ── */}
+      <HeroStats />
 
     </section>
   );
